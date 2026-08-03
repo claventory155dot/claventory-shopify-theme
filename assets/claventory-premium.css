@@ -1,0 +1,156 @@
+/* ==========================================================================
+   Claventory — premium visual layer on top of Horizon's base styles.
+   ========================================================================== */
+
+/* ---- Scroll-reveal (assets/scroll-reveal.js) ---------------------------- */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---- Hero: scroll indicator ---------------------------------------------- */
+.hero__scroll-indicator {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(20px, 4svh, 48px);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 46px;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0;
+}
+
+.hero__scroll-indicator-line {
+  display: block;
+  width: 3px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--color1, #c6a15b);
+  animation: hero-scroll-cue 1.8s ease-in-out infinite;
+}
+
+@keyframes hero-scroll-cue {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(14px);
+    opacity: 0.2;
+  }
+  61% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll-indicator-line {
+    animation: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .hero__scroll-indicator {
+    display: none;
+  }
+}
+
+/* Hero heading reads larger and more dramatic than Horizon's default h1 */
+.hero .hero__content-wrapper h1 {
+  font-size: clamp(2.75rem, 6vw, 5.25rem);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+}
+
+/* ---- Fix: row-direction custom-width groups ignore the mobile width override.
+   base.css sets `flex-basis: var(--size-style-width)` unconditionally for
+   `.layout-panel-flex--row > .group-block--width-custom`, which wins over the
+   `.size-style` width rule on the flex main axis — so custom_width_mobile
+   never took effect for these (e.g. the premium product-card grid). */
+@media screen and (max-width: 749px) {
+  .layout-panel-flex--row > .group-block--width-custom {
+    flex-basis: var(--size-style-width-mobile, var(--size-style-width));
+  }
+}
+
+/* ---- Header: logo + nav hover animations -------------------------------- */
+.header-logo__image {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-logo:hover .header-logo__image {
+  transform: scale(1.04);
+}
+
+.menu-list__link-title {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-list__link-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -4px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.85;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-list__link:hover .menu-list__link-title::after,
+.menu-list__link[aria-expanded='true'] .menu-list__link-title::after {
+  right: 0;
+}
+
+/* ---- Buttons: premium hover lift ----------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .button,
+  .button-secondary,
+  .button-custom {
+    transition:
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.35s ease,
+      color 0.35s ease,
+      border-color 0.35s ease;
+  }
+
+  .button:hover,
+  .button-secondary:hover,
+  .button-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(11, 11, 11, 0.18);
+  }
+}
+

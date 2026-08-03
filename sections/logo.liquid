@@ -11,9 +11,16 @@
   if section_settings.background_color != blank
     render 'contrast-override', background_color: section_settings.background_color, section_id: section.id
   endif
+
+  assign has_uploaded_logo = false
+  if image != blank
+    assign has_uploaded_logo = true
+  endif
+  assign fallback_logo_url = 'claventory.png' | asset_url
+  assign effective_aspect_ratio = image.aspect_ratio | default: 1
 %}
 
-{%- if image -%}
+{%- if has_uploaded_logo -%}
   {% capture logo_image %}
     {{-
       image
@@ -26,6 +33,17 @@
         alt: shop.name,
         sizes: '(min-width: 750px) calc(var(--logo-width)), 100vw'
     -}}
+  {% endcapture %}
+{%- else -%}
+  {% capture logo_image %}
+    <img
+      src="{{ fallback_logo_url }}"
+      class="logo-section__image"
+      alt="{{ shop.name }}"
+      loading="lazy"
+      width="500"
+      height="500"
+    >
   {% endcapture %}
 {%- endif -%}
 
@@ -45,12 +63,7 @@
       {% if section_settings.unit == 'percent' %}
         --logo-width: {{ section_settings.percent_width }}%;
       {% else %}
-        {% if image %}
-          --logo-width: {{ image.width | times: 1.00 | divided_by: image.height | times: section_settings.pixel_height }}px;
-        {% else %}
-          --logo-width: {{ shop.name.size | times: 0.65 }}em;
-          --logo-height: {{ section_settings.pixel_height }}px;
-        {% endif %}
+        --logo-width: {{ effective_aspect_ratio | times: section_settings.pixel_height }}px;
       {% endif %}
 
       {% if section_settings.custom_mobile_size %}
@@ -58,12 +71,7 @@
           --logo-width-mobile: {{ section_settings.percent_width_mobile }}%;
           --logo-height-mobile: auto;
         {% else %}
-          {% if image %}
-            --logo-width-mobile: {{ image.width | times: 1.00 | divided_by: image.height | times: section_settings.pixel_height_mobile }}px;
-            {% else %}
-              --logo-width-mobile: {{ shop.name.size | times: 0.65 }}em;
-              --logo-height-mobile: {{ section_settings.pixel_height_mobile }}px;
-          {% endif %}
+          --logo-width-mobile: {{ effective_aspect_ratio | times: section_settings.pixel_height_mobile }}px;
         {% endif %}
       {% endif %}
       {% render 'spacing-style', settings: section_settings %}

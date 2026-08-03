@@ -1,0 +1,29 @@
+{%- doc -%}
+  Renders a dimensional, brand-neutral gift box image used as a placeholder
+  wherever a product has no real photo yet (product cards, product media
+  gallery). Original artwork — no third-party branding, so it's always safe to
+  ship in a demo store. A wrapped box works across any product category
+  (beauty, accessories, kitchen, etc.) rather than implying a specific one.
+
+  @param {string} [class] - additional CSS classes for the <img>
+
+  @example
+  {% render 'placeholder-bottle', class: 'media-block__placeholder' %}
+{%- enddoc -%}
+<img
+  src="{{ 'product-box-neutral.png' | asset_url }}"
+  class="placeholder-bottle {{ class }}"
+  alt="{{ 'content.placeholder_image' | t }}"
+  loading="lazy"
+  width="900"
+  height="1125"
+>
+
+{% stylesheet %}
+  .placeholder-bottle {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+{% endstylesheet %}

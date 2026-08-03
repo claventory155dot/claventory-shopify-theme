@@ -7,9 +7,16 @@
   if block_settings.inverse and settings.logo_inverse
     assign image = settings.logo_inverse
   endif
+
+  assign has_uploaded_logo = false
+  if image != blank
+    assign has_uploaded_logo = true
+  endif
+  assign fallback_logo_url = 'claventory.png' | asset_url
+  assign effective_aspect_ratio = image.aspect_ratio | default: 1
 %}
 
-{%- if image -%}
+{%- if has_uploaded_logo -%}
   {% capture logo_image %}
     {{-
       image
@@ -23,6 +30,17 @@
         sizes: '(min-width: 750px) calc(var(--logo-width)), 100vw'
     -}}
   {% endcapture %}
+{%- else -%}
+  {% capture logo_image %}
+    <img
+      src="{{ fallback_logo_url }}"
+      class="logo-block__image"
+      alt="{{ shop.name }}"
+      loading="lazy"
+      width="1254"
+      height="1254"
+    >
+  {% endcapture %}
 {%- endif -%}
 
 <div
@@ -34,12 +52,7 @@
     {% if block_settings.unit == 'percent' %}
       --logo-width: {{ block_settings.percent_width }}%;
     {% else %}
-      {% if image %}
-        --logo-width: {{ image.width | times: 1.00 | divided_by: image.height | times: block_settings.pixel_height }}px;
-      {% else %}
-        --logo-width: {{ shop.name.size | times: 0.65 }}em;
-        --logo-height: {{ block_settings.pixel_height }}px;
-      {% endif %}
+      --logo-width: {{ effective_aspect_ratio | times: block_settings.pixel_height }}px;
     {% endif %}
 
     {% if block_settings.custom_mobile_size %}
@@ -47,12 +60,7 @@
         --logo-width-mobile: {{ block_settings.percent_width_mobile }}%;
         --logo-height-mobile: auto;
       {% else %}
-        {% if image %}
-          --logo-width-mobile: {{ image.width | times: 1.00 | divided_by: image.height | times: block_settings.pixel_height_mobile }}px;
-          {% else %}
-            --logo-width-mobile: {{ shop.name.size | times: 0.65 }}em;
-            --logo-height-mobile: {{ block_settings.pixel_height_mobile }}px;
-        {% endif %}
+        --logo-width-mobile: {{ effective_aspect_ratio | times: block_settings.pixel_height_mobile }}px;
       {% endif %}
     {% endif %}
     {% render 'spacing-style', settings: block_settings %}

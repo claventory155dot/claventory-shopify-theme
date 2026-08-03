@@ -1,0 +1,68 @@
+{%- doc -%}
+  Renders a premium Claventory demo visual in place of Shopify's default
+  line-art placeholder graphics.
+
+  - The main hero slot ('hero-apparel-1') gets a real dark luxury lifestyle
+    photo (verified brand-neutral) for a cinematic full-screen hero.
+  - Literal product-photo slots (product cards, product galleries) get a
+    dimensional, brand-neutral bottle render (original artwork, no third-party
+    branding) instead of a thin outline icon or a real photo — a real mood
+    photo would be mistaken for an actual product photo, and Shopify's default
+    line-art reads as "broken image" rather than "this is a perfume".
+  - Everything else (lifestyle/category/editorial contexts) gets real,
+    verified brand-neutral photography.
+
+  @param {string} [name] - semantic hint used to pick a visual (mirrors the
+    names previously passed to the `placeholder_svg_tag` filter, e.g.
+    'hero-apparel-1', 'product-apparel-2', or a custom hint like 'men')
+  @param {string} [class] - additional CSS classes for the rendered element
+
+  @example
+  {% render 'placeholder-photo', name: 'hero-apparel-1', class: 'hero__media' %}
+{%- enddoc -%}
+{% liquid
+  assign product_slot_names = 'product-apparel-1,product-apparel-2,product-apparel-3,detailed-apparel-1' | split: ','
+  assign is_product_slot = false
+  if product_slot_names contains name
+    assign is_product_slot = true
+  endif
+%}
+{% if is_product_slot %}
+  {% render 'placeholder-bottle', class: class %}
+{% else %}
+  {% liquid
+    assign asset_name = 'perfume-desert-1.jpg'
+
+    case name
+      when 'hero-apparel-1'
+        assign asset_name = 'hero-luxury-jewelry.jpg'
+      when 'hero-apparel-2'
+        assign asset_name = 'perfume-desert-2.jpg'
+      when 'hero-apparel-3'
+        assign asset_name = 'perfume-giftwrap.jpg'
+      when 'beauty'
+        assign asset_name = 'perfume-rose.jpg'
+      when 'accessories'
+        assign asset_name = 'perfume-leather.jpg'
+      when 'kitchen'
+        assign asset_name = 'category-kitchen.jpg'
+      when 'bestselling'
+        assign asset_name = 'perfume-giftwrap.jpg'
+      else
+        # Deterministic variety fallback for other lifestyle contexts
+        # (blog cards, collection cards, etc.)
+        assign photos = 'perfume-desert-1.jpg,perfume-desert-2.jpg,perfume-leather.jpg,perfume-rose.jpg,perfume-giftwrap.jpg' | split: ','
+        assign name_length = name | size
+        assign photo_index = name_length | modulo: photos.size
+        assign asset_name = photos[photo_index]
+    endcase
+  %}
+  <img
+    src="{{ asset_name | asset_url }}"
+    class="{{ class }}"
+    alt=""
+    loading="lazy"
+    width="1200"
+    height="1600"
+  >
+{% endif %}

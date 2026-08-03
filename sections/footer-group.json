@@ -11,136 +11,214 @@
   "type": "footer",
   "name": "t:names.footer",
   "sections": {
+    "footer_logo": {
+      "type": "logo",
+      "name": "Footer Logo",
+      "settings": {
+        "unit": "pixel",
+        "pixel_height": 40,
+        "alignment_horizontal": "flex-start",
+        "section_width": "page-width",
+        "padding-block-start": 48,
+        "padding-block-end": 0
+      }
+    },
     "footer_m9NzUG": {
       "type": "footer",
       "blocks": {
-        "group_H6VpwJ": {
+        "columns_row": {
           "type": "group",
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 6,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-start",
+            "gap": 40,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
-            "custom_height": 100,
             "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "open_in_new_tab": false,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
-            "text_LWt8Pz": {
-              "type": "text",
+            "col_brand": {
+              "type": "group",
               "settings": {
-                "text": "<h2>Join our email list</h2>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "gap": 14,
+                "width": "custom",
+                "custom_width": 32,
+                "width_mobile": "fill",
+                "height": "fit"
               },
-              "blocks": {}
+              "blocks": {
+                "text_brand": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Claventory crafts rare, long-lasting fragrances composed and bottled in the United Arab Emirates. Luxury Redefined.</p>",
+                    "type_preset": "rte",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left"
+                  }
+                },
+                "social": {
+                  "type": "social-links",
+                  "settings": {
+                    "facebook_url": "https://www.facebook.com/",
+                    "instagram_url": "https://www.instagram.com/",
+                    "tiktok_url": "https://www.tiktok.com/"
+                  }
+                }
+              },
+              "block_order": ["text_brand", "social"]
             },
-            "text_f9CFLH": {
-              "type": "text",
+            "col_shop": {
+              "type": "group",
               "settings": {
-                "text": "<p>Get exclusive deals and early access to new products.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "gap": 10,
+                "width": "custom",
+                "custom_width": 18,
+                "width_mobile": "fill",
+                "height": "fit"
               },
-              "blocks": {}
+              "blocks": {
+                "heading": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h3>Shop</h3>",
+                    "type_preset": "h6",
+                    "width": "100%",
+                    "alignment": "left"
+                  }
+                },
+                "links": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p><a href=\"shopify://collections/best-selling\">Best Selling</a><br><a href=\"shopify://collections/beauty\">Beauty</a><br><a href=\"shopify://collections/accessories\">Accessories</a><br><a href=\"shopify://collections/kitchen-products\">Kitchen Products</a></p>",
+                    "type_preset": "rte",
+                    "width": "100%",
+                    "alignment": "left"
+                  }
+                }
+              },
+              "block_order": ["heading", "links"]
+            },
+            "col_company": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "gap": 10,
+                "width": "custom",
+                "custom_width": 18,
+                "width_mobile": "fill",
+                "height": "fit"
+              },
+              "blocks": {
+                "heading": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h3>Claventory</h3>",
+                    "type_preset": "h6",
+                    "width": "100%",
+                    "alignment": "left"
+                  }
+                },
+                "links": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p><a href=\"/\">Our Story</a><br><a href=\"shopify://pages/contact\">Contact Us</a><br><a href=\"/\">UAE Delivery &amp; Returns</a><br><a href=\"/account\">Track Order</a></p>",
+                    "type_preset": "rte",
+                    "width": "100%",
+                    "alignment": "left"
+                  }
+                }
+              },
+              "block_order": ["heading", "links"]
+            },
+            "col_newsletter": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "gap": 6,
+                "width": "custom",
+                "custom_width": 26,
+                "width_mobile": "fill",
+                "height": "fit"
+              },
+              "blocks": {
+                "text_LWt8Pz": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h3>Join the Claventory Circle</h3>",
+                    "type_preset": "h6",
+                    "width": "100%",
+                    "alignment": "left"
+                  }
+                },
+                "text_f9CFLH": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Be first to discover new fragrances, exclusive UAE launches and private collector events.</p>",
+                    "type_preset": "rte",
+                    "width": "100%",
+                    "alignment": "left"
+                  }
+                },
+                "email_signup_crihX7": {
+                  "type": "email-signup",
+                  "settings": {
+                    "width": "fill",
+                    "custom_width": 100,
+                    "heading_preset": "h3",
+                    "border_style": "all",
+                    "input_style": "custom",
+                    "border_width": 1,
+                    "border_radius": 100,
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.color2 }}",
+                    "input_type_preset": "paragraph",
+                    "style_class": "button-unstyled",
+                    "display_type": "arrow",
+                    "label": "Join",
+                    "integrated_button": true,
+                    "button_type_preset": "paragraph",
+                    "padding-block-start": 8,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  }
+                }
+              },
+              "block_order": ["text_LWt8Pz", "text_f9CFLH", "email_signup_crihX7"]
             }
           },
-          "block_order": [
-            "text_LWt8Pz",
-            "text_f9CFLH"
-          ]
-        },
-        "email_signup_crihX7": {
-          "type": "email-signup",
-          "settings": {
-            "width": "fill",
-            "custom_width": 100,
-            "heading_preset": "h3",
-            "border_style": "all",
-            "input_style": "custom",
-            "border_width": 1,
-            "border_radius": 100,
-            "input_background_color": "{{ settings.color_palette.background }}",
-            "input_text_color": "{{ settings.color_palette.color1 }}",
-            "input_border_color": "{{ settings.color_palette.color2 }}",
-            "input_type_preset": "paragraph",
-            "style_class": "button-unstyled",
-            "display_type": "arrow",
-            "label": "Sign up",
-            "integrated_button": true,
-            "button_type_preset": "paragraph",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+          "block_order": ["col_brand", "col_shop", "col_company", "col_newsletter"]
         }
       },
-      "block_order": [
-        "group_H6VpwJ",
-        "email_signup_crihX7"
-      ],
+      "block_order": ["columns_row"],
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
         "gap": 20,
         "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 30,
-        "padding-block-end": 30
+        "padding-block-start": 40,
+        "padding-block-end": 40
       }
     },
     "footer_utilities_jLGE8U": {
@@ -193,6 +271,7 @@
     }
   },
   "order": [
+    "footer_logo",
     "footer_m9NzUG",
     "footer_utilities_jLGE8U"
   ]

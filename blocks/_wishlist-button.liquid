@@ -1,0 +1,77 @@
+{% liquid
+  assign product = closest.product
+%}
+
+<script
+  src="{{ 'wishlist-button.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+<wishlist-button-component
+  class="wishlist-button"
+  data-product-id="{{ product.id }}"
+  role="button"
+  tabindex="0"
+  aria-label="Add {{ product.title | escape }} to wishlist"
+  on:click="/toggle"
+  {{ block.shopify_attributes }}
+>
+  <svg
+    class="wishlist-button__icon"
+    aria-hidden="true"
+    focusable="false"
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 20 20"
+  >
+    {%- render 'icon', icon: 'heart' -%}
+  </svg>
+</wishlist-button-component>
+
+{% stylesheet %}
+  .wishlist-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: var(--layer-raised, 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+    background: rgb(var(--color-background-rgb) / 0.85);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .wishlist-button:hover {
+    transform: scale(1.08);
+  }
+
+  .wishlist-button__icon {
+    color: var(--color-foreground);
+    opacity: 0.45;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .wishlist-button[data-liked] .wishlist-button__icon {
+    color: var(--color1, #c6a15b);
+    opacity: 1;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Wishlist button",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "Wishlist button"
+    }
+  ]
+}
+{% endschema %}

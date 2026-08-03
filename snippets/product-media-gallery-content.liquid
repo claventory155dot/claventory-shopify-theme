@@ -331,7 +331,7 @@
     "
     {{ block_shopify_attributes }}
   >
-    {{ 'product-apparel-1' | placeholder_svg_tag: 'product-media-gallery__placeholder-image' }}
+    {% render 'placeholder-photo', name: 'product-apparel-1', class: 'product-media-gallery__placeholder-image' %}
   </div>
 {% else %}
   <media-gallery

@@ -31,6 +31,11 @@
     height: 100%;
   }
 
+  /* Positioning context for card overlays (e.g. the wishlist button) */
+  .product-card {
+    position: relative;
+  }
+
   /* Product card title truncation - applied on mobile regardless of view */
   @media screen and (max-width: 749px) {
     :is(.product-card, .product-grid__card) :is(h4, .h4) {

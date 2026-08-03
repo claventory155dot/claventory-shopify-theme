@@ -15,7 +15,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<h1>Page not found</h1>",
+            "text": "<h1>This Page Has Wandered Off</h1>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
@@ -39,7 +39,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>The link may be incorrect, or the page has been removed. </p>",
+            "text": "<p>The link may be incorrect, or the fragrance you're looking for has since moved.</p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",

@@ -31,6 +31,7 @@
     size-style
     {{ class }}
     {% if background_color != blank %} color-custom-{{ block_id }}{% endif %}
+    {% if settings.glass_effect %} group-block--glass{% endif %}
   "
   style="
     {% render 'border-override', settings: settings %}
@@ -96,5 +97,28 @@
   /* Needs the .group-block__link ~ to be specific enough to take effect. */
   .group-block__link ~ .group-block-content--design-mode {
     pointer-events: auto;
+  }
+
+  .group-block--glass {
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Elegant hover zoom for clickable image panels (e.g. category showcases) */
+  .group-block__media-wrapper {
+    overflow: hidden;
+  }
+
+  .group-block__media-wrapper img,
+  .group-block__media-wrapper video {
+    transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .group-block:has(.group-block__link):hover .group-block__media-wrapper img,
+    .group-block:has(.group-block__link):hover .group-block__media-wrapper video {
+      transform: scale(1.05);
+    }
   }
 {% endstylesheet %}
